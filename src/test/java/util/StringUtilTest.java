@@ -1,14 +1,13 @@
 package util;
 
-class StringUtilTest {
-    public static void main(String[] args) {
-        assertEquals(StringUtil.repeat("hola",3), "holaholahola");
-        assertEquals(StringUtil.repeat("hola",1), "hola");
-    }
+import org.junit.jupiter.api.Test;
 
-    private static void assertEquals(String actual, String expected) {
-        if(!actual.equals(expected)){
-            throw new RuntimeException(actual + " is not equal to expected: " + expected);
-        }
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+class StringUtilTest {
+    @Test
+    public void testRepeat() {
+        assertEquals("holahola", StringUtil.repeat("hola",3));
+        assertEquals(StringUtil.repeat("hola",1), "hola");
     }
 }
