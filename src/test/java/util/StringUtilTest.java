@@ -2,19 +2,13 @@ package util;
 
 class StringUtilTest {
     public static void main(String[] args) {
-        //Manualmente:
-        String result = StringUtil.repeat("hola", 3);
-        System.out.println(result);
-        //automatizado:
-        if(!result.equals("holaholahola")){
-            System.out.println("Error");
-        }
+        assertEquals(StringUtil.repeat("hola",3), "holaholahola");
+        assertEquals(StringUtil.repeat("hola",1), "hola");
+    }
 
-        String result2 = StringUtil.repeat("hola", 1);
-        System.out.println(result);
-        //automatizado:
-        if(!result.equals("hola")){
-            System.out.println("Error");
+    private static void assertEquals(String actual, String expected) {
+        if(!actual.equals(expected)){
+            throw new RuntimeException(actual + " is not equal to expected: " + expected);
         }
     }
 }
