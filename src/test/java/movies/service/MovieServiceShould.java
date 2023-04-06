@@ -76,6 +76,91 @@ class MovieServiceShould {
     void return_movies_by_director() {
         Collection<Movie> movies = movieService.findMoviesByDirector("nolan");
         assertThat(getMoviesId(movies), is(Arrays.asList(1, 2, 8)));
+    }
 
+    // MARK
+    @Test
+    public void return_movies_by_action_genre_and_2_and_30_hours_lenght() {
+
+        Collection<Movie> movies =
+                movieService.findMoviesByTemplate(new Movie(null, 150, Genre.ACTION,null));
+        assertThat(getMoviesIds(movies), is(Arrays.asList(7, 9, 10)) );
+    }
+
+    @Test
+    public void return_movies_by_name_and_135_minutes_lenght() {
+
+        Collection<Movie> movies =
+                movieService.findMoviesByTemplate(new Movie("the", 135, null,null));
+        assertThat(getMoviesIds(movies), is(Arrays.asList(3)) );
+    }
+
+    @Test
+    public void return_movies_by_name_and_genre() {
+
+        Collection<Movie> movies =
+                movieService.findMoviesByTemplate(new Movie("the", null, Genre.COMEDY,null));
+        assertThat(getMoviesIds(movies), is(Arrays.asList(3)) );
+    }
+
+    @Test
+    public void return_movies_by_name_by_action_genre_and_2_and_45_hours_lenght() {
+
+        Collection<Movie> movies =
+                movieService.findMoviesByTemplate(new Movie("riseS", 165, Genre.ACTION,null));
+        assertThat(getMoviesIds(movies), is(Arrays.asList(8)) );
+    }
+
+    @Test
+    public void return_movies_by_director_and_2_and_30_hours_lenght() {
+
+        Collection<Movie> movies =
+                movieService.findMoviesByTemplate(new Movie(null, null, 150, null, "Nolan"));
+        assertThat(getMoviesIds(movies), is(Arrays.asList(2)) );
+    }
+
+    @Test
+    public void return_movies_by_director_and_name() {
+
+        Collection<Movie> movies =
+                movieService.findMoviesByTemplate(new Movie(null, "dark", null, null, "nolan"));
+        assertThat(getMoviesIds(movies), is(Arrays.asList(1, 8)) );
+    }
+
+    @Test
+    public void return_movies_by_director_and_thriller_genre() {
+
+        Collection<Movie> movies =
+                movieService.findMoviesByTemplate(new Movie(null, null, null, Genre.THRILLER, "NolaN"));
+        assertThat(getMoviesIds(movies), is(Arrays.asList(2)) );
+    }
+
+    @Test
+    public void return_movies_by_id_and_director() {
+
+        Collection<Movie> movies =
+                movieService.findMoviesByTemplate(new Movie(4, null, null, null, "abrams"));
+        assertThat(getMoviesIds(movies), is(Arrays.asList(4)) );
+    }
+
+    @Test
+    public void return_movies_by_id_and_2_and_30_hours_lenght() {
+
+        Collection<Movie> movies =
+                movieService.findMoviesByTemplate(new Movie(6, null, 150, null, null));
+        assertThat(getMoviesIds(movies), is(Arrays.asList(6)) );
+    }
+
+    @Test
+    public void negative_length() {
+
+        Collection<Movie> movies =
+                movieService.findMoviesByTemplate(new Movie(null, -150, null,null));
+        assertThat(getMoviesIds(movies), is(Arrays.asList()) );
+    }
+
+
+    private List<Integer> getMoviesIds(Collection<Movie> movies) {
+        return movies.stream().map(Movie::getId).collect(Collectors.toList());
     }
 }

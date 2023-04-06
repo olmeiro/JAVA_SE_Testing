@@ -5,15 +5,15 @@ import java.util.Objects;
 public class Movie {
     private Integer id;
     private String name;
-    private int minutes;
+    private Integer minutes;
     private Genre genre;
     private String director;
 
-    public Movie(String name, int minutes, Genre genre, String director) {
+    public Movie(String name, Integer minutes, Genre genre, String director) {
       this(null, name, minutes, genre, director);
     }
 
-    public Movie(Integer id, String name, int minutes, Genre genre, String director) {
+    public Movie(Integer id, String name, Integer minutes, Genre genre, String director) {
         this.id = id;
         this.name = name;
         this.minutes = minutes;
@@ -37,11 +37,11 @@ public class Movie {
         this.name = name;
     }
 
-    public int getMinutes() {
+    public Integer getMinutes() {
         return minutes;
     }
 
-    public void setMinutes(int minutes) {
+    public void setMinutes(Integer minutes) {
         this.minutes = minutes;
     }
 
