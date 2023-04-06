@@ -61,6 +61,18 @@ class MovieRepositoryJdbcIntegrationTest {
         assertThat(movie, is(new Movie(2, "Memento", 113, Genre.THRILLER)));
     }
 
+    @Test
+    void insert_a_movie() {
+        MovieRepositoryImplJdbc movieRepository = new MovieRepositoryImplJdbc(jdbcTemplate);
+
+        Movie movie = new Movie("Super 8", 112, Genre.THRILLER);
+        movieRepository.saveOrUpdate(movie);
+
+        Movie movieLoaded = movieRepository.findById(4); //el próximo id generado
+
+        assertThat(movieLoaded, is(new Movie(4,"Super 8", 112, Genre.THRILLER)));
+    }
+
     //reiniciamos la BBDD con una notación:
     @AfterEach
     public void tearDown() throws Exception {
