@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.Objects;
 
 public class MovieRepositoryImplJdbc implements MovieRepository {
 
@@ -20,7 +21,9 @@ public class MovieRepositoryImplJdbc implements MovieRepository {
 
     @Override
     public Movie findById(long id) {
-        return null;
+        //args:
+        Object[] args = { id };
+        return jdbcTemplate.queryForObject("select * from movies where id = ?", args, movieMapper);
     }
 
     @Override
