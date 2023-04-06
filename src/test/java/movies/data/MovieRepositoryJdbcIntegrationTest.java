@@ -44,9 +44,16 @@ class MovieRepositoryJdbcIntegrationTest {
 
         Collection<Movie> moviesCollection = movieRepository.findAll();
         Collection<Movie> list=Arrays.asList(
-                new Movie(1, "Dark Knight", 152, Genre.ACTION) ,
-                new Movie(2, "Memento", 113, Genre.THRILLER) ,
-                new Movie(3, "Matrix", 136, Genre.ACTION)
+                new Movie(1, "Dark Knight", 152, Genre.ACTION, "Christopher Nolan"),
+                new Movie(2, "Memento", 113, Genre.THRILLER, "Christopher Nolan"),
+                new Movie(3, "There's Something About Mary", 119, Genre.COMEDY, "Peter Farrelly, Bobby Farrelly"),
+                new Movie(4, "Super 8", 112, Genre.THRILLER, "J. J. Abrams"),
+                new Movie(5, "Scream", 111, Genre.HORROR, "Wes Craven"),
+                new Movie(6, "Home Alone", 103, Genre.COMEDY, "Chris Columbus, Raja Gosnell, Peter Hewitt, Rod Daniel"),
+                new Movie(7, "Matrix", 136, Genre.ACTION, "Hermanas Wachowski"),
+                new Movie(8, "Dark Knight Rises", 152, Genre.ACTION, "Christopher Nolan"),
+                new Movie(9, "The Matrix Reloaded", 136, Genre.ACTION, "Hermanas Wachowski"),
+                new Movie(10, "The Matrix Revolutions", 136, Genre.ACTION, "Hermanas Wachowski")
         );
 
         assertEquals(moviesCollection,list);
@@ -58,19 +65,19 @@ class MovieRepositoryJdbcIntegrationTest {
 
         Movie movie = movieRepository.findById(2);
 
-        assertThat(movie, is(new Movie(2, "Memento", 113, Genre.THRILLER)));
+        assertThat(movie, is(new Movie(2, "Memento", 113, Genre.THRILLER, "Christopher Nolan")));
     }
 
     @Test
     void insert_a_movie() {
         MovieRepositoryImplJdbc movieRepository = new MovieRepositoryImplJdbc(jdbcTemplate);
 
-        Movie movie = new Movie("Super 8", 112, Genre.THRILLER);
+        Movie movie = new Movie("Super 8", 112, Genre.THRILLER,"Christopher Nolan");
         movieRepository.saveOrUpdate(movie);
 
         Movie movieLoaded = movieRepository.findById(4); //el próximo id generado
 
-        assertThat(movieLoaded, is(new Movie(4,"Super 8", 112, Genre.THRILLER)));
+        assertThat(movieLoaded, is(new Movie(4,"Super 8", 112, Genre.THRILLER, "J. J. Abrams")));
     }
 
     //reiniciamos la BBDD con una notación:
